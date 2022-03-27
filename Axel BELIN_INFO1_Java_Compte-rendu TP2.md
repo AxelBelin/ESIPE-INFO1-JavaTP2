@@ -4,6 +4,7 @@
 
 1. On considère le code suivant :
         `var s = "toto";`
+
         `System.out.println(s.length());`
 
 - Quel est le type de s ? Comment le compilateur fait-il pour savoir qu'il existe une méthode length() sur s ?
@@ -11,6 +12,7 @@
         Le compilateur va remplacer le mot clé var par String. Une fois que le compilateur a remplacé var par le bon type, il peut ainsi savoir de quelle classe il provient et donc regarder si la méthode appelée provient bien de la classe String.
 
 2. Qu'affiche le code suivant ? Expliquer.
+
         `var s1 = "toto";
 
         var s2 = s1;
@@ -22,7 +24,9 @@
         System.out.println(s1 == s3);`
 
 Le code suivant affiche : **true** puis **false** .
+
 `var s1 = "toto";`
+
 `var s2 = s1;`
 
 Ces instructions font une copie de l'adresse de la variable s1 dans la variable s2. Ainsi, le compilateur n'a pas besoin de recréer un nouvel objet string pour en faire une copie car s2 va pointer vers la case mémoire qui contient toto.
@@ -33,29 +37,36 @@ Le deuxième affichage affiche false car on compare l'adresse de deux objets dif
         Pour tester le contenu de deux objets différents on appelle la méthode equals() qui teste si le contenu de deux objets sont égaux.
 
 4. Qu'affiche le code suivant ? Expliquer.
+
         `var s6 = "toto";`
+
         `var s7 = "toto";`
+
         `System.out.println(s6 == s7);`
 
-        Pour les chaines de carcatères, Java créé un objet en mémoire la première fois que le compilateur en voit une.
-        Ensuite, si une autre chaine de caractères est crée et qu'elle a le même contenu qu'une chaine déjà en mémoire, comme une chaine est immuable, il n'y a aucun intéret de réallouer de la mémoire pour stocker un objet qui a le même contenu et qui ne sera pas modifié.
-        Dans cet exemple, le compilateur va regarder le hashcode des chaines s6 et s7.
-        Comme il est identique (car elles contiennent toutes les 2 la chaine "toto"), alors il sait qu'il n'a pas besoin de stocker une deuxième fois une chaine qui est identique à une autre déjà stockée.
+Pour les chaines de carcatères, Java créé un objet en mémoire la première fois que le compilateur en voit une.
+Ensuite, si une autre chaine de caractères est crée et qu'elle a le même contenu qu'une chaine déjà en mémoire, comme une chaine est immuable, il n'y a aucun intéret de réallouer de la mémoire pour stocker un objet qui a le même contenu et qui ne sera pas modifié.
+Dans cet exemple, le compilateur va regarder le hashcode des chaines s6 et s7.
+Comme il est identique (car elles contiennent toutes les 2 la chaine "toto"), alors il sait qu'il n'a pas besoin de stocker une deuxième fois une chaine qui est identique à une autre déjà stockée.
 
 5. Expliquer pourquoi il est important que java.lang.String ne soit pas mutable.
+
         En Java les objets String sont immuables car si plusieurs objets différents pointent sur l'adresse d'une même chaine cela peut être dangereux d'avoir le droit de modifier le contenu de l'objet.
         En effet, on risquerait de provoquer des incohérences dans le programme.
         Par exemple: si j'ai une chaine "Bonjour" et qu'un objet pointe sur son adresse, il n'est pas souhaitable de modifier cette chaine à un autre endroit du code avec "au revoir". Cela va créer une incohérence dans le programme.
 
 6. Qu'affiche le code suivant ?
+
         `var s8 = "hello";`
+
         `s8.toUpperCase();`
+
         `System.out.println(s8);`
 
-        Le code suivant affiche "hello".
-        La méthode toUpperCase() renvoie un nouvel objet String. Donc ici, un appel à cette méthode renvoie une nouvelle chaine "TOTO".
-        Cepandant, comme la valeur de retour de cette méthode n'est pas stockée dans une variable alors on ne la récupère pas. Ainsi, l'affichage de s8 affiche la chaine qui a été assignée à cet objet lors de sa création ("toto").
-        Les String sont immutables en Java et les méthodes appelées sur les objets String renvoient un nouvel objet String.
+Le code suivant affiche "hello".
+La méthode toUpperCase() renvoie un nouvel objet String. Donc ici, un appel à cette méthode renvoie une nouvelle chaine "TOTO".
+Cepandant, comme la valeur de retour de cette méthode n'est pas stockée dans une variable alors on ne la récupère pas. Ainsi, l'affichage de s8 affiche la chaine qui a été assignée à cet objet lors de sa création ("toto").
+Les String sont immutables en Java et les méthodes appelées sur les objets String renvoient un nouvel objet String.
 
 ## Exercice 2 - En morse. Stop.
 
@@ -71,7 +82,7 @@ Le deuxième affichage affiche false car on compare l'adresse de deux objets dif
 		  
 		        for(var s: args) {
 
-			  str += s + " Stop. " ;
+			        str += s + " Stop. " ;
 
 		        }
 		  
@@ -86,13 +97,16 @@ Le deuxième affichage affiche false car on compare l'adresse de deux objets dif
 
 2. A quoi sert l'objet java.lang.StringBuilder ?
 L'objet java.lang.StringBuilder permet de créer un Buffer extensible de caractères (un buffer qui contient des caractères) :
-- Cela évite d’avoir trop d’allocations de String intermédiaires comme lorsque l'on utilise l'opérateur +.
-- Cela permet de faire du formattage de chaine de caractères sans avoir à créer plusieurs String.
-- Cela est pratique pour des questions d'optimisation de mémoire.
+   - Cela évite d’avoir trop d’allocations de String intermédiaires comme lorsque l'on utilise l'opérateur +.
+   - Cela permet de faire du formattage de chaine de caractères sans avoir à créer plusieurs String.
+   - Cela est pratique pour des questions d'optimisation de mémoire.
+
 Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sous la forme d'un String grâce à la méthode toString().
 
-- Pourquoi sa méthode append(String) renvoie-t-elle un objet de type StringBuilder ? 
+- Pourquoi sa méthode append(String) renvoie-t-elle un objet de type StringBuilder ?
+
         La méthode append() renvoie un StringBuilder pour pouvoir chainer les appels. Cela est très pratique pour formatter une chaine de caractères, surtout pour des questions de lisibilité du code.
+        
         Exemple :
         
         `var builder = new StringBuilder();
@@ -129,6 +143,7 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
    `ceci Stop. est Stop. drole Stop.`
 
 - Quel est l'avantage par rapport à la solution précédente ?
+
         L'opérateur + sur une chaine est très innéficace dans une boucle car le compilateur ne peut pas faire la concaténation en une seule chaine.
         En effet, il est obligé de réallouer de la mémoire à chaque itération. Par contre, hors d'une boucle, on peut utiliser + sans problème car le compilateur va faire toute la concaténation dans une seule chaine.
 
@@ -153,7 +168,8 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
    
    `toto titi tata`
 
-- Pourquoi peut-on utiliser ' ' à la place de " " ?
+- Pourquoi peut-on utiliser **' '** à la place de **" "** ?
+
         Dans cet exemple, on ne veut concaténer qu'un seul caractère entre chaque +.
         Comme on ne veut qu'ajouter un espace cela ne sert à rien de recréer une nouvelle chaine juste pour un seul caractère.
         Les quotes ('') peuvent être utilisées pour ne contenir qu'un seul caractère.
@@ -203,9 +219,9 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
                 
                 26: return`
 
-        D'après le bytecode généré, on remarque que cette version de Java utilise des opérations spécifiques appelées invokedynamic et invokevirtual.
-        Ces dernières permettent ici d'effectuer une concaténation de plusieurs chaines de carcatères dans une seule chaine sans avoir besoin de réallouer à chaque fois de la mémoire.
-        Ainsi, une seule et unique chaine sera crée en mémoire qui contiendra la chaine de caractère finale issue de la concatanation suivante : first + ' ' + second + ' ' + last.
+D'après le bytecode généré, on remarque que cette version de Java utilise des opérations spécifiques appelées invokedynamic et invokevirtual.
+Ces dernières permettent ici d'effectuer une concaténation de plusieurs chaines de carcatères dans une seule chaine sans avoir besoin de réallouer à chaque fois de la mémoire.
+Ainsi, une seule et unique chaine sera crée en mémoire qui contiendra la chaine de caractère finale issue de la concatanation suivante : first + ' ' + second + ' ' + last.
 
 5. Compiler le code de la question 1, puis utiliser la commande javap pour afficher le bytecode Java généré.
    ### Bytecode généré :
@@ -266,7 +282,9 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
                 45: return`
 
 - Que pouvez-vous en déduire ?
+
         On constate que par rapport au Bytecode généré par la classe Test de la question 4, les instruction suivante ont été ajoutées entre l'appel de invokedynamic et de invokevirtual :
+                
                 `31: astore_1
 
                 32: iinc          4, 1
@@ -277,44 +295,49 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
                 
                 41: aload_1`
 
-        Les instructions ci-dessus signifient :
-        - On stocke une référence vers un élément contenu dans args dans la variable locale numéro 1.
-        - On incrémente un compteur de 1. Ce compteur est un nombre qui va de 0 à la taille de args.
-        - On effectue un jump vers l'instruction numéro 11 avec l'instruction goto. Cela signifie qu'on effectue une itération supplémentaire de la boucle for.
-                - On récupère la nouvelle valeur du compteur qui correspond au compteur de boucle.
-                - On récupère la taille du tableau args
-                - On compare la valeur du compteur avec la taille du tableau : Si le compteur >= à la taille du tableau cela signifie qu'on a terminé de parcourir args et que l'on peut sortir de la boucle for. Si c'est le cas, on effectue un jump à l'instruction numéro 38.
-                - L'instruction numéro 38 correspond à l'affichage de la chaine de caractères formatée sur la sortie standard. Cette chaine contient tous les arguments saisis par l'utilisateur séparés par la chaine "Stop." Il s'agit de la dernière instruction de notre programme.
+Les instructions ci-dessus signifient :
+- On stocke une référence vers un élément contenu dans args dans la variable locale numéro 1.
+- On incrémente un compteur de 1. Ce compteur est un nombre qui va de 0 à la taille de args.
+- On effectue un jump vers l'instruction numéro 11 avec l'instruction goto. Cela signifie qu'on effectue une itération supplémentaire de la boucle for.
+   - On récupère la nouvelle valeur du compteur qui correspond au compteur de boucle.
+   - On récupère la taille du tableau args
+   - On compare la valeur du compteur avec la taille du tableau : Si le compteur >= à la taille du tableau cela signifie qu'on a terminé de parcourir args et que l'on peut sortir de la boucle for. Si c'est le cas, on effectue un jump à l'instruction numéro 38.
+   - L'instruction numéro 38 correspond à l'affichage de la chaine de caractères formatée sur la sortie standard. Cette chaine contient tous les arguments saisis par l'utilisateur séparés par la chaine "Stop." Il s'agit de la dernière instruction de notre programme.
 
-        On constate que le compilateur est obligé d'executer n fois les instructions à l'intégrieur d'une boucle où n représente ici la taille du tableau args.
-        A l'éxecution, notre programme devra donc allouer de la mémoire autant de fois qu'il fera d'itérations. D'ailleurs, plus la taille de args est importante, plus le programme devra faire des appels à malloc() pour stocker la chaine de caractère formatée.
-        
-        Ainsi, on peut en déduire que L'opérateur + sur une chaine de carcatères est très innéficace dans une boucle car le compilateur ne peut pas faire la concaténation en une seule chaine.
-        Il est obligé de réallouer de la mémoire à chaque itération. Par contre, hors d'une boucle, on peut utiliser + sans problème car le compilateur va faire toute la concaténation dans une seule chaine.
+On constate que le compilateur est obligé d'executer n fois les instructions à l'intégrieur d'une boucle où n représente ici la taille du tableau args.
+A l'éxecution, notre programme devra donc allouer de la mémoire autant de fois qu'il fera d'itérations. D'ailleurs, plus la taille de args est importante, plus le programme devra faire des appels à malloc() pour stocker la chaine de caractère formatée.
+
+Ainsi, on peut en déduire que L'opérateur + sur une chaine de carcatères est très innéficace dans une boucle car le compilateur ne peut pas faire la concaténation en une seule chaine.
+Il est obligé de réallouer de la mémoire à chaque itération. Par contre, hors d'une boucle, on peut utiliser + sans problème car le compilateur va faire toute la concaténation dans une seule chaine.
 
 - Dans quel cas doit-on utiliser StringBuilder.append() plutôt que le + ?
+
         Dans une boucle : il faut utiliser un StringBuilder au lieu de concaténer avec +.
         Néanmoins, l'utilisation de l'opérateur + rend le code plus lisible. Ainsi, lorsque cela ne réduit pas la performance du programme, il faut préférer l'utilisation de cet opérateur.
         C'est notamment la cas à l'extérieur d'une boucle car le compilateur peut cacluler la taille de la chaine finale et ne faire qu'une seule allocation mémoire pour stocker la chaine finale si il y a plusieurs +. 
 
 - Et pourquoi est-ce que le chargé de TD va me faire les gros yeux si j'écris un + dans un appel à la méthode append ?
-        C'est totalement inutile car on perd tout l'intéret d'utiliser un StringBuilder, voire pire car on paye le prix de deux allocations alors qu'on en a besoin que d'une seule :
-        1. La création de l'objet StringBuilder
-        2. L'allocation d'un nouveau String avec l'utilisation de l'opérateur + en paramètre de la méthode append().
+
+C'est totalement inutile car on perd tout l'intéret d'utiliser un StringBuilder, voire pire car on paye le prix de deux allocations alors qu'on en a besoin que d'une seule :
+1. La création de l'objet StringBuilder
+2. L'allocation d'un nouveau String avec l'utilisation de l'opérateur + en paramètre de la méthode append().
 
 ## Exercice 3 - Reconnaissance de motifs
 
 1. A quoi servent la classe java.util.regex.Pattern et sa méthode compile ?
+
 **java.util.regex.Pattern**
 - Cette classe sert à composer et utiliser des expressions régulières.
 Un Pattern représente un automate créé à partir d’une expression régulière.
 Cette classe contient des méthodes permettant de créer des expressions régulières, mais aussi de vérifier et valider leurs syntaxes.
 - Méthode compile :
+
 Cette méthode permet de "compiler" une expression régulière donnée en paramètres sous forme d'un string.
 Elle retourne un objet Pattern qui contient la version "compilée" de l'expression régulière donnée en paramètre de la méthode si sa syntaxe est valide, sinon si elle est invalide elle lève une exception de type PatternSyntaxException.
 "compiler" signifie ici verifier si la syntaxe de l'expression régulière est correcte, c'est-à-dire qu'elle doit uniquement utiliser les symboles mis à disposition par la classe Pattern (+, *, ?,[a-z], [0-9], etc.), sans contenir d'erreur de syntaxe.
 
 - A quoi sert la classe java.util.regex.Matcher ?
+
 **java.util.regex.Matcher**
 - Cette classe permet de vérifier si un motif donné correspond bien à une expression régulière (match).
 Elle parcourt l’automate créé sur un texte (motif).
@@ -341,7 +364,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 		System.out.println("Cet argument n'est pas un nombre") ;
 
 	}
-
    } `
 
 3. Modifier le programme pour que l'on reconnaisse (et extrait) un nombre même dans le cas où le nombre est précédé par des caractères qui ne sont pas des chiffres.
@@ -349,8 +371,8 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
    Méthode qui permet de renverser un String (le mettre à l'envers) en utilisant un StringBuilder :
 
    `private static String reverseString(String str) {
-
-        return new StringBuilder(str).reverse().toString() ;
+           
+           return new StringBuilder(str).reverse().toString() ;
 
     }`
 
@@ -369,7 +391,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
                 System.out.println("Cet argument n'est pas une chaine valide") ;
         
         }
-
     } `
 
 4. Écrire une méthode qui prend en paramètre une chaîne de caractères contenant une adresse IPv4 et renvoie un tableau de 4 bytes. Il faut tester qu'il s'agit bien d'une adresse valide. Vous utiliserez pour cela la notion de groupe.
@@ -397,7 +418,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 			}
 				
 			parsedIP[i - 1] = (byte)validByte ; // Si validByte > 127 alors on retombe dans les négatifs car un byte ne peut pas stocker une valeur > 127. Il faut donc penser à ajouter un masque (& 0xFF) lors de la lecture du tableau de byte retourné par cette méthode
-			
                 }
 
 	} else {
@@ -407,7 +427,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 	}
 
         return parsedIP ;
-
    }
 	
    public static void printParsedIPv4(byte[] parsedIP) {
@@ -433,7 +452,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
         if(args.length <= 0) {
                 
                 throw new IllegalArgumentException("Usage : saisir au moins 1 argument") ;
-
 	}
 
         byte[] parsedIP = new byte[4] ;
@@ -443,7 +461,6 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
         parsedIP = parseIPv4(args[0]) ;
         
         printParsedIPv4(parsedIP) ;
-
    } `
 
    ### Résultats des questions 2, 3 et 4 :
