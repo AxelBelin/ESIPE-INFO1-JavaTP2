@@ -10,8 +10,8 @@
 
 - Quel est le type de s ? Comment le compilateur fait-il pour savoir qu'il existe une méthode length() sur s ?
 
-        Le mot clé var, permet de faire un "inférence de type" (le compilateur va déduire le type à partir d'une expression). Ainsi, le compilateur va automatiquement appliquer le type déclaré sur la variable. Ici, il s'agit d'une chaine de caractère, donc un String.
-        Le compilateur va remplacer le mot clé var par String. Une fois que le compilateur a remplacé var par le bon type, il peut ainsi savoir de quelle classe il provient et donc regarder si la méthode appelée provient bien de la classe String.
+Le mot clé var, permet de faire un "inférence de type" (le compilateur va déduire le type à partir d'une expression). Ainsi, le compilateur va automatiquement appliquer le type déclaré sur la variable. Ici, il s'agit d'une chaine de caractère, donc un String.
+Le compilateur va remplacer le mot clé var par String. Une fois que le compilateur a remplacé var par le bon type, il peut ainsi savoir de quelle classe il provient et donc regarder si la méthode appelée provient bien de la classe String.
 
 2. Qu'affiche le code suivant ? Expliquer.
 
