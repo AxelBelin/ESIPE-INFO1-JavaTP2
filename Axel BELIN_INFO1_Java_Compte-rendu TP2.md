@@ -83,9 +83,9 @@ Les String sont immutables en Java et les méthodes appelées sur les objets Str
 		
 		        var str = "" ;
 		  
-		        for(var s: args) {
+		        for(var anArgument: args) {
 
-			        str += s + " Stop. " ;
+			        str += anArgument + " Stop. " ;
 
 		        }
 		  
@@ -131,9 +131,9 @@ Exemple :
 		
 		        var builder = new StringBuilder() ;
 		
-		        for(var s: args) {
+		        for(var anArgument: args) {
 
-			   builder.append(s).append(" Stop. ") ;
+			   builder.append(anArgument).append(" Stop. ") ;
 
 		        }
 			  
@@ -357,18 +357,18 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
    ### Code :
    `var regex = Pattern.compile("[0-9]+") ;
    
-   for(var s: args) {
+    for(var anArgument: args) {
 
-        if(regex.matcher(s).matches()) {
+        if(regex.matcher(anArgument).matches()) {
 
-                System.out.println(Integer.parseInt(s)) ; // on cast si jamais la saisie commence par un 0 car un nombre qui commence par 0 n'est pas un nombre (sauf 0)
+                System.out.println(Integer.parseInt(anArgument)) ; // on cast si jamais la saisie commence par un 0 car un nombre qui commence par 0 n'est pas un nombre (sauf 0)
 	
         } else {
 
 		System.out.println("Cet argument n'est pas un nombre") ;
 
 	}
-        
+
    } `
 
 3. Modifier le programme pour que l'on reconnaisse (et extrait) un nombre même dans le cas où le nombre est précédé par des caractères qui ne sont pas des chiffres.
@@ -383,9 +383,9 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 
     `var regex = Pattern.compile("([0-9]+)") ;
     
-    for(var s: args) {
+    for(var anArgument: args) {
 
-        var matcher = regex.matcher(reverseString(s)) ;
+        var matcher = regex.matcher(reverseString(anArgument)) ;
 			
 	if(matcher.lookingAt()) {
 
@@ -440,9 +440,9 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 
 	var separator = "";
 		
-	for(var s: parsedIP) {
+	for(var aByte: parsedIP) {
                 
-                builder.append(separator).append(s & 0xFF) ;
+                builder.append(separator).append(aByte & 0xFF) ;
 
 		separator = "." ;
 
@@ -474,43 +474,43 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
    
    `Question 2`
 
-   `Cet argument n'est pas un nombre` (192.168.128.16)
+   `Cet argument n'est pas un nombre` **(192.168.128.16)**
 
-   `Cet argument n'est pas un nombre` (toto)
+   `Cet argument n'est pas un nombre` **(toto)**
 
-   `Cet argument n'est pas un nombre` (abc3)
+   `Cet argument n'est pas un nombre` **(abc3)**
 
    `789`
 
-   `Cet argument n'est pas un nombre` (42a13)
+   `Cet argument n'est pas un nombre` **(42a13)**
 
-   `Cet argument n'est pas un nombre` (abc)
+   `Cet argument n'est pas un nombre` **(abc)**
 
-   `Cet argument n'est pas un nombre` (4de)
+   `Cet argument n'est pas un nombre` **(4de)**
 
-   `Cet argument n'est pas un nombre` (f6h)
+   `Cet argument n'est pas un nombre` **(f6h)**
 
-   `Cet argument n'est pas un nombre` (78942a44)
+   `Cet argument n'est pas un nombre` **(78942a44)**
 
    `Question 3`
 
-   `16` (192.168.128.16)
+   `16` **(192.168.128.16)**
 
-   `Cet argument n'est pas une chaine valide` (toto)
+   `Cet argument n'est pas une chaine valide` **(toto)**
 
-   `3` (abc3)
+   `3` **(abc3)**
 
    `789`
 
-   `13` (42a13)
+   `13` **(42a13)**
 
-   `Cet argument n'est pas une chaine valide` (abc)
+   `Cet argument n'est pas une chaine valide` **(abc)**
 
-   `Cet argument n'est pas une chaine valide` (4de)
+   `Cet argument n'est pas une chaine valide` **(4de)**
 
-   `Cet argument n'est pas une chaine valide` (f6h)
+   `Cet argument n'est pas une chaine valide` **(f6h)**
 
-   `44` (78942a44)
+   `44` **(78942a44)**
 
    `Question 4`
 
