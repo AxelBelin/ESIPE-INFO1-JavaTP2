@@ -3,6 +3,7 @@
 ## Exercice 1 - Assignation, égalité, référence
 
 1. On considère le code suivant :
+
         `var s = "toto";`
 
         `System.out.println(s.length());`
