@@ -9,6 +9,7 @@
         `System.out.println(s.length());`
 
 - Quel est le type de s ? Comment le compilateur fait-il pour savoir qu'il existe une méthode length() sur s ?
+
         Le mot clé var, permet de faire un "inférence de type" (le compilateur va déduire le type à partir d'une expression). Ainsi, le compilateur va automatiquement appliquer le type déclaré sur la variable. Ici, il s'agit d'une chaine de caractère, donc un String.
         Le compilateur va remplacer le mot clé var par String. Une fois que le compilateur a remplacé var par le bon type, il peut ainsi savoir de quelle classe il provient et donc regarder si la méthode appelée provient bien de la classe String.
 
@@ -35,6 +36,7 @@ Un objet String est immuable, donc le compilateur sait qu'il s'agit d'une consta
 Le deuxième affichage affiche false car on compare l'adresse de deux objets différents qui contiennent deux adresses différentes. S1 et s3 ont le même contenu mais pas la même adresse. En effet, s3 est un autre objet de type String car le mot clé "new" effectue une allocation en mémoire.
 
 3. Quelle est la méthode à utiliser si l'on veut tester si le contenu des chaînes de caractères est le même ?
+
         Pour tester le contenu de deux objets différents on appelle la méthode equals() qui teste si le contenu de deux objets sont égaux.
 
 4. Qu'affiche le code suivant ? Expliquer.
@@ -52,9 +54,9 @@ Comme il est identique (car elles contiennent toutes les 2 la chaine "toto"), al
 
 5. Expliquer pourquoi il est important que java.lang.String ne soit pas mutable.
 
-        En Java les objets String sont immuables car si plusieurs objets différents pointent sur l'adresse d'une même chaine cela peut être dangereux d'avoir le droit de modifier le contenu de l'objet.
-        En effet, on risquerait de provoquer des incohérences dans le programme.
-        Par exemple: si j'ai une chaine "Bonjour" et qu'un objet pointe sur son adresse, il n'est pas souhaitable de modifier cette chaine à un autre endroit du code avec "au revoir". Cela va créer une incohérence dans le programme.
+En Java les objets String sont immuables car si plusieurs objets différents pointent sur l'adresse d'une même chaine cela peut être dangereux d'avoir le droit de modifier le contenu de l'objet.
+En effet, on risquerait de provoquer des incohérences dans le programme.
+Par exemple: si j'ai une chaine "Bonjour" et qu'un objet pointe sur son adresse, il n'est pas souhaitable de modifier cette chaine à un autre endroit du code avec "au revoir". Cela va créer une incohérence dans le programme.
 
 6. Qu'affiche le code suivant ?
 
@@ -97,6 +99,7 @@ Les String sont immutables en Java et les méthodes appelées sur les objets Str
    `ceci Stop. est Stop. drole Stop.`
 
 2. A quoi sert l'objet java.lang.StringBuilder ?
+
 L'objet java.lang.StringBuilder permet de créer un Buffer extensible de caractères (un buffer qui contient des caractères) :
    - Cela évite d’avoir trop d’allocations de String intermédiaires comme lorsque l'on utilise l'opérateur +.
    - Cela permet de faire du formattage de chaine de caractères sans avoir à créer plusieurs String.
@@ -106,9 +109,9 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
 
 - Pourquoi sa méthode append(String) renvoie-t-elle un objet de type StringBuilder ?
 
-        La méthode append() renvoie un StringBuilder pour pouvoir chainer les appels. Cela est très pratique pour formatter une chaine de caractères, surtout pour des questions de lisibilité du code.
-        
-        Exemple :
+La méthode append() renvoie un StringBuilder pour pouvoir chainer les appels. Cela est très pratique pour formatter une chaine de caractères, surtout pour des questions de lisibilité du code.
+
+Exemple :
         
         `var builder = new StringBuilder();
         
@@ -145,8 +148,8 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
 
 - Quel est l'avantage par rapport à la solution précédente ?
 
-        L'opérateur + sur une chaine est très innéficace dans une boucle car le compilateur ne peut pas faire la concaténation en une seule chaine.
-        En effet, il est obligé de réallouer de la mémoire à chaque itération. Par contre, hors d'une boucle, on peut utiliser + sans problème car le compilateur va faire toute la concaténation dans une seule chaine.
+L'opérateur + sur une chaine est très innéficace dans une boucle car le compilateur ne peut pas faire la concaténation en une seule chaine.
+En effet, il est obligé de réallouer de la mémoire à chaque itération. Par contre, hors d'une boucle, on peut utiliser + sans problème car le compilateur va faire toute la concaténation dans une seule chaine.
 
 4. Recopier le code suivant dans une classe de Test :
    ### Code :
@@ -171,9 +174,9 @@ Une fois le formatage de la chaine terminé, il faut mettre le StringBuilder sou
 
 - Pourquoi peut-on utiliser **' '** à la place de **" "** ?
 
-        Dans cet exemple, on ne veut concaténer qu'un seul caractère entre chaque +.
-        Comme on ne veut qu'ajouter un espace cela ne sert à rien de recréer une nouvelle chaine juste pour un seul caractère.
-        Les quotes ('') peuvent être utilisées pour ne contenir qu'un seul caractère.
+Dans cet exemple, on ne veut concaténer qu'un seul caractère entre chaque +.
+Comme on ne veut qu'ajouter un espace cela ne sert à rien de recréer une nouvelle chaine juste pour un seul caractère.
+Les quotes ('') peuvent être utilisées pour ne contenir qu'un seul caractère.
 
 - Compiler le code puis utiliser la commande javap pour afficher le bytecode Java (qui n'est pas un assembleur) généré. Que pouvez-vous en déduire ?
 
@@ -284,7 +287,7 @@ Ainsi, une seule et unique chaine sera crée en mémoire qui contiendra la chain
 
 - Que pouvez-vous en déduire ?
 
-        On constate que par rapport au Bytecode généré par la classe Test de la question 4, les instruction suivante ont été ajoutées entre l'appel de invokedynamic et de invokevirtual :
+On constate que par rapport au Bytecode généré par la classe Test de la question 4, les instruction suivante ont été ajoutées entre l'appel de invokedynamic et de invokevirtual :
                 
                 `31: astore_1
 
@@ -313,9 +316,9 @@ Il est obligé de réallouer de la mémoire à chaque itération. Par contre, ho
 
 - Dans quel cas doit-on utiliser StringBuilder.append() plutôt que le + ?
 
-        Dans une boucle : il faut utiliser un StringBuilder au lieu de concaténer avec +.
-        Néanmoins, l'utilisation de l'opérateur + rend le code plus lisible. Ainsi, lorsque cela ne réduit pas la performance du programme, il faut préférer l'utilisation de cet opérateur.
-        C'est notamment la cas à l'extérieur d'une boucle car le compilateur peut cacluler la taille de la chaine finale et ne faire qu'une seule allocation mémoire pour stocker la chaine finale si il y a plusieurs +. 
+Dans une boucle : il faut utiliser un StringBuilder au lieu de concaténer avec +.
+Néanmoins, l'utilisation de l'opérateur + rend le code plus lisible. Ainsi, lorsque cela ne réduit pas la performance du programme, il faut préférer l'utilisation de cet opérateur.
+C'est notamment la cas à l'extérieur d'une boucle car le compilateur peut cacluler la taille de la chaine finale et ne faire qu'une seule allocation mémoire pour stocker la chaine finale si il y a plusieurs +. 
 
 - Et pourquoi est-ce que le chargé de TD va me faire les gros yeux si j'écris un + dans un appel à la méthode append ?
 
@@ -365,6 +368,7 @@ On peut ensuite appeler des méthodes de la classe Matcher sur cet objet comme :
 		System.out.println("Cet argument n'est pas un nombre") ;
 
 	}
+        
    } `
 
 3. Modifier le programme pour que l'on reconnaisse (et extrait) un nombre même dans le cas où le nombre est précédé par des caractères qui ne sont pas des chiffres.
