@@ -37,7 +37,7 @@ Le deuxième affichage affiche false car on compare l'adresse de deux objets dif
 
 3. Quelle est la méthode à utiliser si l'on veut tester si le contenu des chaînes de caractères est le même ?
 
-        Pour tester le contenu de deux objets différents on appelle la méthode equals() qui teste si le contenu de deux objets sont égaux.
+Pour tester le contenu de deux objets différents on appelle la méthode equals() qui teste si le contenu de deux objets sont égaux.
 
 4. Qu'affiche le code suivant ? Expliquer.
 
